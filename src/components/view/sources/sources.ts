@@ -1,11 +1,12 @@
 import './sources.css';
 
 class Sources {
-    draw(data) {
+    draw(data: any) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp');
 
-        data.forEach((item) => {
+        data.forEach((item: any) => {
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             const sourceClone = sourceItemTemp.content.cloneNode(true);
 
             sourceClone.querySelector('.source__item-name').textContent = item.name;
@@ -14,6 +15,7 @@ class Sources {
             fragment.append(sourceClone);
         });
 
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         document.querySelector('.sources').append(fragment);
     }
 }
