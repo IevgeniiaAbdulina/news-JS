@@ -5,7 +5,15 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index.js'),
+    output: {
+        filename: 'index.js',
+        path: path.resolve(__dirname, '../dist'),
+    },
     mode: 'development',
+    devtool: 'source-map',
+    resolve: {
+        extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js'],
+    },
     module: {
         rules: [
             {
@@ -17,14 +25,15 @@ const baseConfig = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+            },
+            {
+                test: /\.js$/,
+                loader: 'source-map-loader',
+            },
         ],
-    },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    },
-    output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
