@@ -3,13 +3,21 @@ module.exports = {
         browser: true,
         es2021: true,
     },
+    overrides: [
+        {
+            files: ['**/*.ts'],
+            parser: '@typescript-eslint/parser',
+            plugins: ['@typescript-eslint'],
+            extends: ['plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended'],
+        },
+    ],
     extends: ['airbnb-base', 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
     parserOptions: {
         ecmaVersion: 12,
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint'],
     rules: {
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],

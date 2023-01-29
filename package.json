@@ -8,9 +8,13 @@
         "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
         "build": "webpack --config ./webpack.config.js --env mode=prod",
         "lint": "eslint --ext .ts,.js .",
+        "lint-fix": "node_modules/.bin/eslint . --fix",
         "dev": "tsc --watch",
         "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
     },
+    "pre-commit": [
+        "lint-fix"
+    ],
     "repository": {
         "type": "git",
         "url": ""
