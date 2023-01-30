@@ -1,47 +1,45 @@
 class Loader {
-    baseLink: any;
+    baseLink: string;
 
-    options: any;
+    options: object;
 
-    constructor(baseLink: any, options: any) {
+    constructor(baseLink: string, options: object) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp(
-        {
-            endpoint,
-            options = {}
-        }: any,
-        callback = () => {
+    getResp({ endpoint, options = {} }: any, callback: (payload: object) => void) {
+        function internalCallback(payload: object) {
             console.error('No callback for GET response');
+            callback(payload);
         }
-    ) {
-        this.load('GET', endpoint, callback, options);
+
+        this.load('GET', endpoint, internalCallback, options);
     }
 
-    errorHandler(res: any) {
+    // eslint-disable-next-line class-methods-use-this
+    errorHandler(res: Response) {
+        // error case
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
-                console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
+                console.error(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
-
         return res;
     }
 
-    makeUrl(options: any, endpoint: any) {
+    makeUrl(options: { sources: string }, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
-        Object.keys(urlOptions).forEach((key) => {
-            url += `${key}=${urlOptions[key]}&`;
+        Object.entries(urlOptions).forEach(([key, value]) => {
+            url += `${key}=${value}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    load(method: any, endpoint: any, callback: any, options = {}) {
+    load(method: string, endpoint: string, callback: (payload: object) => void, options: { sources: string }) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

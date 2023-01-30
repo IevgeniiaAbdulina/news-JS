@@ -11,8 +11,11 @@
         "node": true
     },
     "rules": {
+        "class-methods-use-this": ["error", { "enforceForClassFields": false }],
         "no-debugger": "off",
-        "no-console": 0,
-        "class-methods-use-this": "off"
+        "no-console": 0
+        // "class-methods-use-this": "off"
+        // "import/extensions": 1,
+        // "import/no-unresolved": [2, { "commonjs": true }]
     }
 }

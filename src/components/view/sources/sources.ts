@@ -1,11 +1,22 @@
 import './sources.css';
 
+export type SourceData = {
+    category: string;
+    country: string;
+    description: string;
+    id: string;
+    language: string;
+    name: string;
+    url: string;
+};
+
 class Sources {
-    draw(data: any) {
+    // eslint-disable-next-line class-methods-use-this
+    draw(data: Array<SourceData>) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp');
 
-        data.forEach((item: any) => {
+        data.forEach((item: SourceData) => {
             // @ts-expect-error TS(2531): Object is possibly 'null'.
             const sourceClone = sourceItemTemp.content.cloneNode(true);
 
