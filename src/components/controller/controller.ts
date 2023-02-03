@@ -1,17 +1,18 @@
-// eslint-disable-next-line import/extensions, import/no-unresolved
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+import { DrawNewsData, DrawSourcesData } from '../data/responseData';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: (data: any) => void) {
-        super.getResp(
-            {
-                endpoint: 'sources',
-            },
-            callback
-        );
+    getSources(callback: (data: DrawSourcesData) => void) {
+        function internalCallback(dataAsObject: object) {
+            callback(dataAsObject as DrawSourcesData);
+        }
+
+        super.getResp({ endpoint: 'sources' }, internalCallback);
     }
 
-    getNews(e: Event & { target: Element }, callback: () => void) {
+    getNews(e: Event & { target: Element }, callback: (data: DrawNewsData) => void) {
         let { target } = e;
         const newsContainer = e.currentTarget;
 

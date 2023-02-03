@@ -1,20 +1,26 @@
-class Loader {
-    baseLink: string;
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+import { RequestParam } from '../data/requestParam';
+import { DrawNewsData } from '../data/responseData';
 
-    options: object;
+class Loader {
+    public baseLink: string;
+
+    public options: object;
 
     constructor(baseLink: string, options: object) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp({ endpoint, options = {} }: any, callback: (payload: object) => void) {
-        function internalCallback(payload: object) {
+    getResp(param: RequestParam, callback: (data: DrawNewsData) => void) {
+        function internalCallback(data: DrawNewsData) {
             console.error('No callback for GET response');
-            callback(payload);
+
+            callback(data);
         }
 
-        this.load('GET', endpoint, internalCallback, options);
+        this.load('GET', param, internalCallback);
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -28,9 +34,9 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: { sources: string }, endpoint: string) {
-        const urlOptions = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
+    makeUrl(param: RequestParam) {
+        const urlOptions = { ...this.options, ...param.options };
+        let url = `${this.baseLink}${param.endpoint}?`;
 
         Object.entries(urlOptions).forEach(([key, value]) => {
             url += `${key}=${value}&`;
@@ -39,8 +45,8 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (payload: object) => void, options: { sources: string }) {
-        fetch(this.makeUrl(options, endpoint), { method })
+    load(method: string, param: RequestParam, callback: (data: DrawNewsData) => void) {
+        fetch(this.makeUrl(param), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
             .then((data) => callback(data))

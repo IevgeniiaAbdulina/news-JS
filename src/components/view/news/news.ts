@@ -1,13 +1,16 @@
+/* eslint-disable import/no-unresolved */
+import { ArticleData } from 'src/components/data/responseData';
 import './news.css';
 
 class News {
-    draw(data: any) {
-        const news = data.length >= 10 ? data.filter((_item: any, idx: any) => idx < 10) : data;
+    // eslint-disable-next-line class-methods-use-this
+    draw(data: ArticleData[]) {
+        const news = data.length >= 10 ? data.filter((_item: ArticleData, idx: number) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp');
 
-        news.forEach((item: any, idx: any) => {
+        news.forEach((item: ArticleData, idx: number) => {
             // @ts-expect-error TS(2531): Object is possibly 'null'.
             const newsClone = newsItemTemp.content.cloneNode(true);
 

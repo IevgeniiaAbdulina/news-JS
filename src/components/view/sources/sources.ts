@@ -1,18 +1,10 @@
+/* eslint-disable import/no-unresolved */
+import { SourceData } from 'src/components/data/responseData';
 import './sources.css';
-
-export type SourceData = {
-    category: string;
-    country: string;
-    description: string;
-    id: string;
-    language: string;
-    name: string;
-    url: string;
-};
 
 class Sources {
     // eslint-disable-next-line class-methods-use-this
-    draw(data: Array<SourceData>) {
+    draw(data: SourceData[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp');
 
