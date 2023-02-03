@@ -23,6 +23,10 @@ const baseConfig = {
             {
                 test: /\.ts?$/,
                 use: 'ts-loader',
+                // loader: 'ts-loader',
+                // options: {
+                //     configFile: 'webpack_configs/tsconfig.webpack.json',
+                // },
                 exclude: /node_modules/,
             },
             {
@@ -46,6 +50,7 @@ const baseConfig = {
 
 module.exports = ({ mode }) => {
     const isProductionMode = mode === 'prod';
+    // eslint-disable-next-line global-require
     const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
 
     return merge(baseConfig, envConfig);

@@ -14,19 +14,20 @@ module.exports = {
     extends: ['airbnb-base', 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     parser: '@typescript-eslint/parser',
     plugins: ['@typescript-eslint'],
+    root: true,
     parserOptions: {
         ecmaVersion: 12,
         sourceType: 'module',
     },
     rules: {
-        'no-restricted-imports': 'off',
+        // 'no-restricted-imports': 'off',
         '@typescript-eslint/no-restricted-imports': 'warn',
-        'import/extensions': 1,
-        'import/no-unresolved': [2, { commonjs: true }],
         '@typescript-eslint/no-non-null-assertion': 'warn',
         '@typescript-eslint/no-unused-vars': 'error',
-        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         '@typescript-eslint/no-explicit-any': 'warn',
+        '@typescript-eslint/no-var-requires': 0,
+        'import/extensions': 1,
+        'import/no-unresolved': [2, { commonjs: true }],
         'no-restricted-syntax': [
             'error',
             {
