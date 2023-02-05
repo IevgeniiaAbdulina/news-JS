@@ -1,7 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     color: #fff;
     background: #17181c;
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 
 header {
@@ -15,21 +22,98 @@ header h1 {
 
 footer {
     height: 100px;
+    padding: 10px 30px;
+    background-color: #242528;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 footer .copyright {
     font-size: 14px;
-    color: #333;
+    color: rgb(189, 189, 189);
     text-align: center;
 }
 footer .copyright a {
-    color: #444;
+    color: rgb(94, 94, 94);
 }
 footer .copyright a:hover {
     color: #555;
 }
 footer .copyright:before {
     content: '©';
+}
+
+/* ========================================= */
+/*          MAIN SECTION STYLE               */
+/* ========================================= */
+
+main {
+    width: 100%;
+    height: auto;
+    padding: 10px 30px;
+}
+
+.news {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* ========================================= */
+/*          FOOTER SECTION STYLE               */
+/* ========================================= */
+
+.schooll-logo {
+    width: 100px;
+    height: auto;
+}
+time {
+    color: rgb(189, 189, 189);
+}
+.attribution {
+    color: #30c5ff;
+}
+.attribution a {
+    color: #c430ff;
+}
+.attribution a:hover {
+    color: #d261ff;
+}
+
+@media only screen and (min-width: 1920px) {
+    body {
+        width: 1920px;
+        margin: 0 auto;
+    }
+
+    main {
+        margin: 0 auto;
+    }
+
+    .news {
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+
+    .news__item {
+        max-width: 600px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .news {
+        flex-direction: column;
+        max-width: 700px;
+    }
+
+    .news__item {
+        min-width: 320px;
+    }
+
+    footer {
+        height: 200px;
+        padding: 30px 30px;
+        flex-direction: column;
+    }
 }
