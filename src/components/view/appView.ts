@@ -1,8 +1,9 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import { DrawNewsData, DrawSourcesData } from '../data/responseData';
+import { DrawSourcesData } from '../data/responseData';
 import News from './news/news';
 import Sources from './sources/sources';
+import {News as NewsModel } from '../models/News';
 
 export class AppView {
     news: News;
@@ -14,9 +15,8 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    drawNews(data: DrawNewsData) {
-        const values = data?.articles ? data?.articles : [];
-        this.news.draw(values);
+    drawNews({ articles = [] }: NewsModel ) {
+        this.news.draw(articles);
     }
 
     drawSources(data: DrawSourcesData) {

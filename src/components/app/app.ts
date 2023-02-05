@@ -1,7 +1,8 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+import { News } from 'src/components/models/News';
 import AppController from '../controller/controller';
-import { DrawNewsData, DrawSourcesData } from '../data/responseData';
+import { DrawSourcesData } from '../data/responseData';
 import { AppView } from '../view/appView';
 
 class App {
@@ -19,7 +20,7 @@ class App {
         document
             .querySelector('.sources')
             .addEventListener('click', (e: Event & { target: Element }) =>
-                this.controller.getNews(e, (data: DrawNewsData) => this.view.drawNews(data))
+                this.controller.getNews(e, (data: News) => this.view.drawNews(data))
             );
         this.controller.getSources((data: DrawSourcesData) => this.view.drawSources(data));
     }

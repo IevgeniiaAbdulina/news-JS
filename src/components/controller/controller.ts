@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import { DrawNewsData, DrawSourcesData } from '../data/responseData';
+import { News } from 'src/components/models/News';
+import { DrawSourcesData } from '../data/responseData';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
@@ -12,7 +13,7 @@ class AppController extends AppLoader {
         super.getResp({ endpoint: 'sources' }, internalCallback);
     }
 
-    getNews(e: Event & { target: Element }, callback: (data: DrawNewsData) => void) {
+    getNews(e: Event & { target: Element }, callback: (data: News) => void) {
         let { target } = e;
         const newsContainer = e.currentTarget;
 
