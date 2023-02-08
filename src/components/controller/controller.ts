@@ -1,16 +1,12 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import { DrawSourcesData } from '../data/responseData';
 import { News } from '../models/News';
+import { SourceList } from '../models/Source';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: (data: DrawSourcesData) => void) {
-        function internalCallback(dataAsObject: object) {
-            callback(dataAsObject as DrawSourcesData);
-        }
-
-        super.getResp({ endpoint: 'sources' }, internalCallback);
+    getSources(callback: (data: SourceList) => void) {
+        super.getResp({ endpoint: 'sources' }, callback);
     }
 
     getNews(e: Event & { target: Element }, callback: (data: News) => void) {

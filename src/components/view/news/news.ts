@@ -1,20 +1,20 @@
 /* eslint-disable import/no-unresolved */
-import { ArticleData } from 'src/components/data/responseData';
 import './news.css';
+import { Articles } from 'src/components/models/Article';
 
 export default class News {
-    draw = (data: ArticleData[]) => {
+    draw = (data: Articles) => {
         const news = this.getNewsData(data);
         const fragment = this.createFragment(news);
         this.renderNews(fragment);
     };
 
-    private createFragment(news: ArticleData[]): DocumentFragment {
+    private createFragment(news: Articles): DocumentFragment {
         const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp');
 
         if (newsItemTemp) {
-            news.forEach((item: ArticleData, idx: number) => {
+            news.forEach((item: Articles, idx: number) => {
                 const newsClone = this.createNewsClone(newsItemTemp, item, idx);
                 fragment.append(newsClone);
             });
@@ -22,7 +22,7 @@ export default class News {
         return fragment;
     }
 
-    private createNewsClone = (newsItem: Element, item: ArticleData, idx: number): DocumentFragment => {
+    private createNewsClone = (newsItem: Element, item: Articles, idx: number): DocumentFragment => {
         // @ts-expect-error TS(2531): Object is possibly 'null'.
         const newsClone = newsItem.content.cloneNode(true);
 
@@ -48,7 +48,7 @@ export default class News {
         return newsClone;
     };
 
-    private getNewsData = (data: ArticleData[]) => data.slice(0, 10);
+    private getNewsData = (data: Articles) => data.slice(0, 10);
 
     private renderNews = (fragment: DocumentFragment) => {
         const textNode = document.querySelector('.news');

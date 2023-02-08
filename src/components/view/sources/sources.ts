@@ -1,26 +1,41 @@
 /* eslint-disable import/no-unresolved */
-import { SourceData } from 'src/components/data/responseData';
 import './sources.css';
+import { SourceList, Sources as SourceModel } from 'src/components/models/Source';
 
-class Sources {
-    // eslint-disable-next-line class-methods-use-this
-    draw(data: SourceData[]) {
+export default class Sources {
+    draw = (sources: SourceList) => {
+        const fragment = this.createFragment(sources);
+        this.renderSources(fragment);
+    };
+
+    private createFragment(sources: SourceList): DocumentFragment {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp');
 
-        data.forEach((item: SourceData) => {
-            // @ts-expect-error TS(2531): Object is possibly 'null'.
-            const sourceClone = sourceItemTemp.content.cloneNode(true);
+        if (sourceItemTemp) {
+            sources.forEach((item: SourceModel) => {
+                const sourceClone = this.createSourceClone(sourceItemTemp, item);
 
-            sourceClone.querySelector('.source__item-name').textContent = item.name;
-            sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
-
-            fragment.append(sourceClone);
-        });
-
-        // @ts-expect-error TS(2531): Object is possibly 'null'.
-        document.querySelector('.sources').append(fragment);
+                fragment.append(sourceClone);
+            });
+        }
+        return fragment;
     }
-}
 
-export default Sources;
+    private createSourceClone = (sourceItem: Element, item: SourceModel): DocumentFragment => {
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
+        const sourceClone = sourceItem.content.cloneNode(true);
+
+        sourceClone.querySelector('.source__item-name').textContent = item.name;
+        sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
+
+        return sourceClone;
+    };
+
+    private renderSources = (fragment: DocumentFragment) => {
+        const sourcesList = document.querySelector('.sources');
+        if (sourcesList) {
+            sourcesList.append(fragment);
+        }
+    };
+}
