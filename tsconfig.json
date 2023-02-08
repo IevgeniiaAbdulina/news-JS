@@ -20,7 +20,7 @@
         "noImplicitThis": true,
         "skipLibCheck": true,
         "paths": {
-            "*": ["*", "src/*", "src/setup/*", "src/logic/*", "src/models/*", "config/*"]
+            "*": ["*", "src/*", "src/setup/*", "src/logic/*", "src/components/models/*", "config/*"]
         }
     },
     "include": ["src/**/*", "./test", "./*", "./config"],

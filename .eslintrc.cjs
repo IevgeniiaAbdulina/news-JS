@@ -20,7 +20,6 @@ module.exports = {
         sourceType: 'module',
     },
     rules: {
-        // 'no-restricted-imports': 'off',
         '@typescript-eslint/no-restricted-imports': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'warn',
         '@typescript-eslint/no-unused-vars': 'error',
